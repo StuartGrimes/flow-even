@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_StuartGrimes_flow_even_1752610687338-pr-trigger-input-set
+  identifier: Build_StuartGrimes_flow_even_1752610687338prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_StuartGrimes_flow_even_1752610687338
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
