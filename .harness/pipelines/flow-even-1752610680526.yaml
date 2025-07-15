@@ -10,26 +10,50 @@ pipeline:
         connectorRef: account.Github
         repoName: StuartGrimes/flow-even
   stages:
-    - stage:
-        identifier: build
-        name: build
-        spec:
-          caching:
-            enabled: true
-          cloneCodebase: true
-          execution:
-            steps:
-              - step:
-                  identifier: echo
-                  name: echo
-                  spec:
-                    command: echo hello world
-                  timeout: ""
-                  type: Run
-          platform:
-            arch: Arm64
-            os: MacOS
-          runtime:
-            spec: {}
-            type: Docker
-        type: CI
+    - parallel:
+        - stage:
+            identifier: build
+            name: build
+            spec:
+              caching:
+                enabled: true
+              cloneCodebase: true
+              execution:
+                steps:
+                  - step:
+                      identifier: echo
+                      name: echo
+                      spec:
+                        command: echo hello world
+                      timeout: ""
+                      type: Run
+              platform:
+                arch: Arm64
+                os: MacOS
+              runtime:
+                spec: {}
+                type: Docker
+            type: CI
+        - stage:
+            name: update version number
+            identifier: update_version_number
+            description: ""
+            type: Custom
+            spec:
+              execution:
+                steps:
+                  - step:
+                      type: ShellScript
+                      name: ShellScript_update_version_number
+                      identifier: ShellScript_update_version_number
+                      spec:
+                        shell: Bash
+                        executionTarget: {}
+                        source:
+                          type: Inline
+                          spec:
+                            script: print("place holder")
+                        environmentVariables: []
+                        outputVariables: []
+                      timeout: 10m
+            tags: {}
