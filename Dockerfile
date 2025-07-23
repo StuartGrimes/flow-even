@@ -1,4 +1,6 @@
-FROM ubuntu:latest
+FROM openjdk
 LABEL authors="stuart"
-
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+COPY . /app
+RUN flow-even
+CMD ["java", "flow-even"]
